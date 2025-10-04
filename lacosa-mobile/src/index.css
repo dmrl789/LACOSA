@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* iOS safe area for bottom nav */
+:root {
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Helpful utilities */
+.card {
+  @apply rounded-xl border bg-white shadow-sm;
+}
+.section {
+  @apply p-4;
+}

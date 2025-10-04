@@ -2,20 +2,22 @@
 from __future__ import annotations
 
 import textwrap
-from typing import Iterable, List
+from typing import Iterable, List, Tuple
 
 from app.models.base import ConciergeAnswer
 from app.services.data_loader import load_dataset
+from app.services.localization import annotate_translation, localize_fallback, normalize_language
 
 
 def _flatten_sources(keys: Iterable[str]) -> List[str]:
     return sorted(set(keys))
 
 
-def _search_sections(query: str) -> tuple[str, List[str]]:
+def _search_sections(query: str, language: str) -> Tuple[List[str], List[str], int]:
     query_lower = query.lower()
     responses: List[str] = []
     sources: List[str] = []
+    matches = 0
 
     # Safety data
     safety_data = load_dataset("safety")
@@ -25,6 +27,7 @@ def _search_sections(query: str) -> tuple[str, List[str]]:
                 f"{zone['neighborhood']}: Risk {zone['risk_level']} — {zone['description']} (Trend: {zone['trend']})."
             )
             sources.append(f"safety:{zone['id']}")
+            matches += 1
 
     # Schools
     for school in load_dataset("schools"):
@@ -33,6 +36,7 @@ def _search_sections(query: str) -> tuple[str, List[str]]:
                 f"{school['name']} ({school['curriculum']}, rating {school['rating']}/5). {school['application_tips']}"
             )
             sources.append(f"schools:{school['id']}")
+            matches += 1
 
     # Food venues
     for venue in load_dataset("venues"):
@@ -41,6 +45,7 @@ def _search_sections(query: str) -> tuple[str, List[str]]:
                 f"{venue['name']} — {venue['description']} (Tags: {', '.join(venue['tags'])})."
             )
             sources.append(f"venues:{venue['id']}")
+            matches += 1
 
     # Transport options
     for transport in load_dataset("transport"):
@@ -49,6 +54,7 @@ def _search_sections(query: str) -> tuple[str, List[str]]:
                 f"{transport['provider']} {transport['mode']} — {transport['description']} (Safety: {transport['safety_notes']})."
             )
             sources.append(f"transport:{transport['id']}")
+            matches += 1
 
     # Relocation pack general summary
     packs = load_dataset("relocation")
@@ -69,17 +75,33 @@ def _search_sections(query: str) -> tuple[str, List[str]]:
             )
         )
         sources.append(f"relocation:{city['city']}")
+        matches += 1
 
     if not responses:
-        responses.append(
-            "I don't have an exact match, but Palermo's city guide covers safety, schools, housing, and more in the app. Try a more specific neighborhood or keyword."
-        )
+        responses.append(localize_fallback(language))
         sources.append("guide:general")
 
-    return "\n".join(responses), _flatten_sources(sources)
+    return responses, _flatten_sources(sources), matches
 
 
-def answer_query(query: str) -> ConciergeAnswer:
+def _calculate_confidence(matches: int) -> float:
+    if matches <= 0:
+        return 0.2
+    return min(0.95, 0.35 + 0.15 * matches)
+
+
+def answer_query(query: str, language: str | None = None) -> ConciergeAnswer:
     """Generate a simple answer from curated datasets."""
-    answer, sources = _search_sections(query)
-    return ConciergeAnswer(query=query, answer=answer, sources=sources)
+    active_language, requested_language = normalize_language(language)
+    responses, sources, matches = _search_sections(query, active_language)
+    answer = "\n".join(responses)
+    answer = annotate_translation(answer, active_language, requested_language, matches > 0)
+    confidence = _calculate_confidence(matches)
+    return ConciergeAnswer(
+        query=query,
+        answer=answer,
+        sources=sources,
+        confidence=confidence,
+        language=active_language,
+        requested_language=requested_language,
+    )

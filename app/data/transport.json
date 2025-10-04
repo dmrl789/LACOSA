@@ -1,0 +1,29 @@
+[
+  {
+    "id": "transport-001",
+    "mode": "taxi",
+    "provider": "Taxi Palermo",
+    "description": "Trusted taxi cooperative with WhatsApp booking.",
+    "contact": "+39 345 123 4567",
+    "availability": "24/7",
+    "safety_notes": "Share ride via app; drivers vetted by municipality"
+  },
+  {
+    "id": "transport-002",
+    "mode": "rideshare",
+    "provider": "Free Now",
+    "description": "App-based rides available in central Palermo.",
+    "contact": null,
+    "availability": "Daily 06:00-02:00",
+    "safety_notes": "Check license plate before boarding"
+  },
+  {
+    "id": "transport-003",
+    "mode": "public transit",
+    "provider": "AMAT Tram T1",
+    "description": "Tram connecting Notarbartolo to Roccella with real-time arrival data.",
+    "contact": null,
+    "availability": "Every 10 min 07:00-21:00",
+    "safety_notes": "Avoid late night solo rides eastbound"
+  }
+]

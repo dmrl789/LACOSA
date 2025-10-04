@@ -1,0 +1,22 @@
+[
+  {
+    "id": "event-001",
+    "name": "Palermo Street Food Festival",
+    "category": "festival",
+    "venue": "Historic Center",
+    "start_time": "2024-06-14T17:00:00",
+    "end_time": "2024-06-16T23:00:00",
+    "summary": "Three-day celebration of Sicilian street food with live music and family zones.",
+    "ticket_url": "https://visitpalermo.it/events/street-food"
+  },
+  {
+    "id": "event-002",
+    "name": "Sunset Jazz at Foro Italico",
+    "category": "concert",
+    "venue": "Foro Italico",
+    "start_time": "2024-06-20T19:30:00",
+    "end_time": "2024-06-20T22:00:00",
+    "summary": "Weekly outdoor jazz concerts overlooking the sea. Bring a picnic blanket.",
+    "ticket_url": null
+  }
+]

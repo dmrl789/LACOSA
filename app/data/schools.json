@@ -1,0 +1,35 @@
+[
+  {
+    "id": "school-001",
+    "name": "International School of Palermo",
+    "curriculum": "IB",
+    "level": "primary",
+    "language": ["English", "Italian"],
+    "rating": 4.5,
+    "tuition_eur": 8500,
+    "address": "Via Principe di Belmonte 103",
+    "application_tips": "Apply by February; rolling admissions for relocations"
+  },
+  {
+    "id": "school-002",
+    "name": "Liceo Scientifico Leonardo",
+    "curriculum": "Italian National",
+    "level": "secondary",
+    "language": ["Italian"],
+    "rating": 4.2,
+    "tuition_eur": null,
+    "address": "Via Dante 33",
+    "application_tips": "Requires residency proof; orientation week in September"
+  },
+  {
+    "id": "school-003",
+    "name": "Bilingual Montessori Palermo",
+    "curriculum": "Montessori",
+    "level": "early childhood",
+    "language": ["English", "Italian"],
+    "rating": 4.8,
+    "tuition_eur": 7200,
+    "address": "Via Marchese di Villabianca 40",
+    "application_tips": "Schedule a trial day and bring vaccination records"
+  }
+]

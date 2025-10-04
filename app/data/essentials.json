@@ -1,0 +1,20 @@
+[
+  {
+    "id": "essential-001",
+    "name": "Farmacia Internazionale",
+    "type": "pharmacy",
+    "tags": ["24h", "english-speaking"],
+    "description": "24-hour pharmacy with English-speaking staff",
+    "neighborhood": "Borgo Vecchio",
+    "coordinates": {"lat": 38.1293, "lng": 13.3611}
+  },
+  {
+    "id": "essential-002",
+    "name": "MediaWorld Palermo",
+    "type": "electronics",
+    "tags": ["appliances", "laptops"],
+    "description": "Large electronics store with delivery options",
+    "neighborhood": "Forum Palermo",
+    "coordinates": {"lat": 38.1226, "lng": 13.4152}
+  }
+]

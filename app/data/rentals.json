@@ -1,0 +1,42 @@
+[
+  {
+    "id": "rent-001",
+    "title": "2BR furnished flat near Teatro Massimo",
+    "price_eur": 950,
+    "bedrooms": 2,
+    "furnished": true,
+    "kid_friendly": true,
+    "pet_friendly": false,
+    "neighborhood": "Politeama",
+    "verified": true,
+    "coordinates": {"lat": 38.1234, "lng": 13.3567},
+    "contact": "verified.agent@lacosa.city",
+    "url": "https://lacosa.city/rentals/001"
+  },
+  {
+    "id": "rent-002",
+    "title": "Loft with terrace in Kalsa",
+    "price_eur": 780,
+    "bedrooms": 1,
+    "furnished": true,
+    "kid_friendly": false,
+    "pet_friendly": true,
+    "neighborhood": "Kalsa",
+    "verified": false,
+    "coordinates": {"lat": 38.1189, "lng": 13.3702},
+    "contact": "kalsa.lofts@example.com"
+  },
+  {
+    "id": "rent-003",
+    "title": "Family apartment near international school",
+    "price_eur": 1200,
+    "bedrooms": 3,
+    "furnished": false,
+    "kid_friendly": true,
+    "pet_friendly": true,
+    "neighborhood": "Mondello",
+    "verified": true,
+    "coordinates": {"lat": 38.2067, "lng": 13.3221},
+    "contact": "familyhomes@trustedagency.it"
+  }
+]

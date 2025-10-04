@@ -1,0 +1,32 @@
+[
+  {
+    "id": "user-001",
+    "name": "Ava",
+    "nationality": "USA",
+    "interests": ["remote work", "cafes", "language exchange"],
+    "has_kids": false,
+    "languages": ["English", "Italian"],
+    "verified": true,
+    "bio": "Product designer working remotely for a Berlin startup."
+  },
+  {
+    "id": "user-002",
+    "name": "Mateo",
+    "nationality": "Argentina",
+    "interests": ["families", "schools", "outdoors"],
+    "has_kids": true,
+    "languages": ["Spanish", "English"],
+    "verified": true,
+    "bio": "Moved with two kids; exploring local bilingual schools."
+  },
+  {
+    "id": "user-003",
+    "name": "Sakura",
+    "nationality": "Japan",
+    "interests": ["foodies", "culture", "photography"],
+    "has_kids": false,
+    "languages": ["Japanese", "English"],
+    "verified": false,
+    "bio": "Documenting Palermo street food and art for a travel blog."
+  }
+]

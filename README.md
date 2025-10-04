@@ -1,46 +1,61 @@
 # LACOSA
 
-## GitHub Project Setup
+Local Companion for Expats & Nomads (LACOSA) is an API-first prototype that brings the product requirements document (PRD) to life. It exposes curated city intelligence for Palermo across safety, housing, schools, lifestyle, community, transport, and relocation workflows.
 
-Follow these steps to create a project board that tracks work derived from `LACOSA_PRD.md`:
+## Project Structure
 
-1. Open the repository in GitHub and navigate to **Projects** → **New Project**.
-2. Choose the **Board** layout and name the project **LACOSA Roadmap**.
-3. Create the following columns:
-   - **Backlog** – raw ideas and early research.
-   - **Ready** – specification completed and development can start.
-   - **In Progress** – active development items.
-   - **Review** – work awaiting code review or QA sign-off.
-   - **Done** – completed and accepted tasks.
-4. When creating issues, set their **Project** field to **LACOSA Roadmap** so they automatically appear on the board.
+```
+app/
+  api/            # FastAPI routers grouped by feature area
+  data/           # Seed datasets backing each endpoint
+  models/         # Pydantic schemas shared across routers
+  services/       # Helper utilities (data loading, concierge logic)
+  main.py         # FastAPI application entrypoint
+LACOSA_PRD.md     # Product requirements document
+requirements.txt  # Python dependencies
+```
 
-## Suggested Labels
+## Getting Started
 
-Use these labels to triage work quickly:
+1. **Install dependencies** (preferably in a virtual environment):
+   ```bash
+   pip install -r requirements.txt
+   ```
+2. **Run the API locally**:
+   ```bash
+   uvicorn app.main:app --reload
+   ```
+3. **Explore the interactive docs** at [http://localhost:8000/docs](http://localhost:8000/docs).
 
-| Label | Purpose |
-| --- | --- |
-| `enhancement` | New feature requests and improvements. |
-| `bug` | Defects or unexpected behavior. |
-| `ui/ux` | Design-driven changes. |
-| `data` | Data integrations, pipelines, or scraping tasks. |
-| `AI` | LLM, chatbot, or other AI-driven work. |
-| `good first issue` | Tasks suitable for new contributors. |
-| `priority: high` | Critical work required for the MVP. |
-| `priority: low` | Nice-to-have items. |
+## Available Endpoints
 
-## First Issues to Create
+| Feature Area | Endpoint | Description |
+| --- | --- | --- |
+| Health | `GET /health` | Service heartbeat for uptime checks. |
+| City Selector | `GET /api/utilities/cities` | List of supported launch cities. |
+| Live Alerts | `GET /api/utilities/alerts` | Safety and mobility alerts with timestamps. |
+| Safety Heatmap | `GET /api/safety/zones` | Neighborhood risk levels and trends. |
+| Housing & Rentals | `GET /api/housing/rentals` | Filterable rental listings with verification flags. |
+| Schools Directory | `GET /api/schools/directory` | Curriculum- and level-based lookup for schools. |
+| Food & Lifestyle | `GET /api/shopping/essentials` | Curated essentials (pharmacies, electronics). |
+| Markets & Deliveries | `GET /api/shopping/markets` | Market schedules plus delivery partners. |
+| Arts & Culture | `GET /api/culture/events` | Upcoming events with AI summaries. |
+| Transport | `GET /api/transport/options` | Trusted transport providers and safety notes. |
+| Community | `GET /api/community/profiles` | Expat profiles with interest filters. |
+| Groups | `GET /api/community/groups` | Interest-based groups and member counts. |
+| AI Concierge | `GET /api/concierge/ask?query=...` | Rule-based concierge stub returning sourced answers. |
+| Relocation Packs | `GET /api/relocation/packs` | Visa, healthcare, and cultural starter kits. |
 
-Start by filing feature issues that map directly to major sections of the product requirements:
+## Testing
 
-- [ ] **Safety Map MVP** — establish the geospatial database and heatmap UI.
-- [ ] **AI Q&A MVP** — deliver a basic chat UI backed by a GPT stub that uses local data.
-- [ ] **City Selector & Onboarding** — implement search plus the sign-in flow.
-- [ ] **Social Graph Skeleton** — provide user profiles and direct messaging basics.
-- [ ] **Events & Arts Integration** — build an event feed prototype.
+Run the automated smoke tests to ensure core flows work as expected:
 
-Each issue should be linked to the corresponding section of `LACOSA_PRD.md`, include acceptance criteria, and be added to the **LACOSA Roadmap** project board.
+```bash
+pytest
+```
 
-## Issue Templates
+## Next Steps
 
-Feature and bug requests should use the templates stored in `.github/ISSUE_TEMPLATE/` to keep the backlog consistent and actionable.
+- Extend the seed data with additional cities (Lisbon, Bali) and real integrations.
+- Replace the rule-based concierge with a Retrieval-Augmented Generation (RAG) workflow.
+- Layer authentication, premium entitlements, and realtime messaging per the PRD roadmap.

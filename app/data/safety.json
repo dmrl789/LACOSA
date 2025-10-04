@@ -1,0 +1,41 @@
+[
+  {
+    "id": "kalsa-day",
+    "neighborhood": "Kalsa",
+    "risk_level": "medium",
+    "description": "Historic center with lively nightlife; keep valuables secure, especially at night.",
+    "trend": "Busier and safer during day, moderate caution at night",
+    "updated_at": "2024-05-20T12:00:00",
+    "polygon": [
+      {"lat": 38.1199, "lng": 13.3689},
+      {"lat": 38.1185, "lng": 13.3730},
+      {"lat": 38.1162, "lng": 13.3712}
+    ]
+  },
+  {
+    "id": "politeama",
+    "neighborhood": "Politeama",
+    "risk_level": "low",
+    "description": "Upscale area with theaters and shopping; generally safe with regular police presence.",
+    "trend": "Stable throughout the day",
+    "updated_at": "2024-05-21T08:30:00",
+    "polygon": [
+      {"lat": 38.1259, "lng": 13.3545},
+      {"lat": 38.1239, "lng": 13.3560},
+      {"lat": 38.1228, "lng": 13.3521}
+    ]
+  },
+  {
+    "id": "ballaro-night",
+    "neighborhood": "Ballarò",
+    "risk_level": "high",
+    "description": "Crowded street market; pickpocketing increases at night and during festivals.",
+    "trend": "Use high caution at night",
+    "updated_at": "2024-05-19T18:15:00",
+    "polygon": [
+      {"lat": 38.1125, "lng": 13.3635},
+      {"lat": 38.1111, "lng": 13.3655},
+      {"lat": 38.1134, "lng": 13.3668}
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "market-001",
+    "name": "Mercato di Ballarò",
+    "category": "fresh produce",
+    "schedule": "Mon-Sat 08:00-18:00",
+    "delivery_partners": ["Glovo"],
+    "coordinates": {"lat": 38.1128, "lng": 13.3639}
+  },
+  {
+    "id": "market-002",
+    "name": "Naturasì Palermo",
+    "category": "organic grocery",
+    "schedule": "Daily 09:00-20:00",
+    "delivery_partners": ["Cortilia", "Deliveroo"],
+    "coordinates": {"lat": 38.1401, "lng": 13.3527}
+  },
+  {
+    "id": "market-003",
+    "name": "IKEA Catania Pickup",
+    "category": "furniture",
+    "schedule": "Pickup Tue & Thu",
+    "delivery_partners": ["IKEA Delivery"],
+    "coordinates": {"lat": 37.4925, "lng": 15.0704}
+  }
+]

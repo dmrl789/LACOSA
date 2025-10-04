@@ -1,0 +1,31 @@
+[
+  {
+    "id": "venue-001",
+    "name": "Pasticceria Cappello",
+    "type": "cafe",
+    "tags": ["wifi", "remote-friendly", "dessert"],
+    "description": "Family-run bakery with strong Wi-Fi and quiet upstairs seating.",
+    "neighborhood": "Porta Nuova",
+    "coordinates": {"lat": 38.1137, "lng": 13.3543},
+    "url": "https://maps.google.com/?q=Pasticceria+Cappello"
+  },
+  {
+    "id": "venue-002",
+    "name": "Ferro di Cavallo",
+    "type": "restaurant",
+    "tags": ["local", "family-friendly"],
+    "description": "Classic trattoria welcoming to families, great for first-time visitors.",
+    "neighborhood": "La Loggia",
+    "coordinates": {"lat": 38.1184, "lng": 13.3621},
+    "url": "https://maps.google.com/?q=Ferro+di+Cavallo"
+  },
+  {
+    "id": "venue-003",
+    "name": "Nea",
+    "type": "bar",
+    "tags": ["cocktails", "expat"],
+    "description": "Cocktail bar popular with international community; bilingual staff.",
+    "neighborhood": "Kalsa",
+    "coordinates": {"lat": 38.1179, "lng": 13.3675}
+  }
+]

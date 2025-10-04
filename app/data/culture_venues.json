@@ -1,0 +1,21 @@
+[
+  {
+    "id": "culture-001",
+    "name": "Teatro Massimo",
+    "type": "theatre",
+    "tags": ["opera", "guided tours"],
+    "description": "Iconic opera house with Italian and English tours.",
+    "neighborhood": "Politeama",
+    "coordinates": {"lat": 38.1217, "lng": 13.3558},
+    "url": "https://www.teatromassimo.it"
+  },
+  {
+    "id": "culture-002",
+    "name": "Cantieri Culturali alla Zisa",
+    "type": "cultural center",
+    "tags": ["exhibitions", "events"],
+    "description": "Converted industrial spaces hosting exhibitions and film festivals.",
+    "neighborhood": "Zisa",
+    "coordinates": {"lat": 38.1187, "lng": 13.3399}
+  }
+]

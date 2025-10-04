@@ -1,0 +1,16 @@
+[
+  {
+    "id": "alert-001",
+    "category": "transport",
+    "message": "AMAT bus drivers striking on Friday from 08:00-12:00.",
+    "severity": "medium",
+    "published_at": "2024-05-22T09:00:00"
+  },
+  {
+    "id": "alert-002",
+    "category": "safety",
+    "message": "Peaceful protest scheduled at Piazza Pretoria Saturday 17:00; expect crowds.",
+    "severity": "low",
+    "published_at": "2024-05-21T14:30:00"
+  }
+]

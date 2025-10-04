@@ -1,0 +1,23 @@
+[
+  {
+    "id": "group-001",
+    "name": "Palermo Digital Nomads",
+    "description": "Weekly coworking pop-ups and weekend excursions.",
+    "interests": ["remote work", "outdoors"],
+    "member_count": 214
+  },
+  {
+    "id": "group-002",
+    "name": "Families in Palermo",
+    "description": "Playdates, school tips and babysitter swap for expat parents.",
+    "interests": ["families", "schools"],
+    "member_count": 167
+  },
+  {
+    "id": "group-003",
+    "name": "Palermo Food Explorers",
+    "description": "Monthly dinner club exploring local trattorie and street food.",
+    "interests": ["foodies", "culture"],
+    "member_count": 320
+  }
+]

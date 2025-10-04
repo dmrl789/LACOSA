@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import asyncio
 import json
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import AsyncIterator
 
 from fastapi import APIRouter, WebSocket
@@ -50,6 +50,6 @@ def _utc_timestamp() -> str:
     # deprecation of ``datetime.utcnow`` and keeps the timestamp precise.
     # ``isoformat`` includes the timezone offset ``+00:00`` for UTC, which we
     # normalise to the ``Z`` suffix expected by clients of this stream.
-    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
 

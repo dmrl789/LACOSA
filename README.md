@@ -17,15 +17,31 @@ requirements.txt  # Python dependencies
 
 ## Getting Started
 
-1. **Install dependencies** (preferably in a virtual environment):
+1. **Create an environment file** so runtime configuration can be managed per deployment:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit the values to match your environment (allowed origins, log level, secrets, etc.).
+
+2. **Install dependencies** (preferably in a virtual environment):
    ```bash
    pip install -r requirements.txt
    ```
-2. **Run the API locally**:
+3. **Run the API locally**:
    ```bash
    uvicorn app.main:app --reload
    ```
-3. **Explore the interactive docs** at [http://localhost:8000/docs](http://localhost:8000/docs).
+4. **Explore the interactive docs** at [http://localhost:8000/docs](http://localhost:8000/docs).
+
+### Running with Docker
+
+The project ships with a production-ready multi-stage image that runs Gunicorn with
+Uvicorn workers under a non-root user. Build and start the container with:
+
+```bash
+docker build -t lacosa-api .
+docker run --env-file .env -p 8000:8000 lacosa-api
+```
 
 ## Available Endpoints
 

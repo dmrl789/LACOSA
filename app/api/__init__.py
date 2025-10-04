@@ -1,6 +1,7 @@
 """API router assembly for LACOSA."""
 from fastapi import APIRouter
 
+from app.core.config import get_settings
 from app.api import (
     concierge,
     culture,
@@ -17,7 +18,8 @@ from app.api import (
 )
 
 
-router = APIRouter(prefix="/api")
+settings = get_settings()
+router = APIRouter(prefix=settings.api_prefix)
 
 router.include_router(utilities.router)
 router.include_router(utilities_stream.router)

@@ -5,11 +5,24 @@ from typing import List, Optional
 
 from fastapi import APIRouter, Query
 
-from app.models.base import RentalListing
+from app.models.base import MapMarker, RentalListing
 from app.services.data_loader import load_dataset
 
 
 router = APIRouter(prefix="/housing", tags=["housing"])
+
+
+HOUSING_MARKERS: list[MapMarker] = [
+    MapMarker(id=1, name="2BR · Kalsa", lat=38.1169, lng=13.3735),
+    MapMarker(id=2, name="Loft · Centro", lat=38.12, lng=13.357),
+]
+
+
+@router.get("", response_model=list[MapMarker])
+def list_housing_markers() -> list[MapMarker]:
+    """Return lightweight housing markers for map overlays."""
+
+    return HOUSING_MARKERS
 
 
 @router.get("/rentals", response_model=List[RentalListing])

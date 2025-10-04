@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional, Literal
+from typing import List, Optional, Literal, Union
 
 from pydantic import BaseModel, Field
 
@@ -10,6 +10,24 @@ from pydantic import BaseModel, Field
 class GeoPoint(BaseModel):
     lat: float = Field(..., description="Latitude coordinate")
     lng: float = Field(..., description="Longitude coordinate")
+
+
+class MapMarker(BaseModel):
+    """Simple marker representation for map overlays."""
+
+    id: Union[str, int]
+    name: str
+    lat: float
+    lng: float
+
+
+class SafetyMarker(BaseModel):
+    """Lightweight safety marker with categorical risk level."""
+
+    id: Union[str, int]
+    lat: float
+    lng: float
+    risk: Literal["low", "medium", "high"]
 
 
 class SafetyZone(BaseModel):

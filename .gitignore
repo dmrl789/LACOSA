@@ -3,3 +3,9 @@ __pycache__/
 ENV/
 venv/
 .cache/
+
+node_modules/
+**/dist/
+lacosa-mobile/*.tsbuildinfo
+lacosa-mobile/vite.config.js
+lacosa-mobile/vite.config.d.ts

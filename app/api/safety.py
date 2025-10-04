@@ -6,11 +6,21 @@ from typing import List, Dict, Any, Optional
 
 from fastapi import APIRouter, Query
 
-from app.models.base import SafetyZone
+from app.models.base import SafetyMarker, SafetyZone
 from app.services.data_loader import load_dataset
 
 
 router = APIRouter(prefix="/safety", tags=["safety"])
+
+
+@router.get("", response_model=List[SafetyMarker])
+def safety_map_markers() -> List[SafetyMarker]:
+    """Return simplified safety markers for the map view."""
+    return [
+        SafetyMarker(id=1, lat=38.118, lng=13.37, risk="high"),
+        SafetyMarker(id=2, lat=38.125, lng=13.34, risk="medium"),
+        SafetyMarker(id=3, lat=38.105, lng=13.37, risk="low"),
+    ]
 
 
 @router.get("/zones", response_model=List[SafetyZone])

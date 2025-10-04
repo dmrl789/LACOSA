@@ -26,11 +26,14 @@ def safety_map_markers() -> List[SafetyMarker]:
 @router.get("/zones", response_model=List[SafetyZone])
 def list_safety_zones(city: Optional[str] = Query(None)) -> List[SafetyZone]:
     """Return safety zones for the active city."""
-    zones = load_dataset("safety", city=city)
     converted = []
-    for zone in zones:
-        zone["updated_at"] = datetime.fromisoformat(zone["updated_at"])
-        converted.append(SafetyZone(**zone))
+    for zone in load_dataset("safety", city=city):
+        updated = zone.get("updated_at")
+        if isinstance(updated, str):
+            updated_dt = datetime.fromisoformat(updated)
+        else:
+            updated_dt = updated
+        converted.append(SafetyZone(**{**zone, "updated_at": updated_dt}))
     return converted
 
 
@@ -40,12 +43,16 @@ def list_safety_zones_geojson(city: Optional[str] = Query(None)) -> Dict[str, An
     zones = load_dataset("safety", city=city)
     features: List[Dict[str, Any]] = []
     for zone in zones:
+        updated = zone.get("updated_at")
+        updated_value = (
+            updated.isoformat() if isinstance(updated, datetime) else str(updated)
+        )
         properties = {
             "id": zone["id"],
             "neighborhood": zone["neighborhood"],
             "risk_level": zone["risk_level"],
             "trend": zone["trend"],
-            "updated_at": zone["updated_at"],
+            "updated_at": updated_value,
             "description": zone["description"],
         }
         # Polygon is stored as list of objects {lat, lng} -> convert to [lng, lat]

@@ -22,8 +22,11 @@ def list_cultural_venues(city: Optional[str] = Query(None)) -> List[Venue]:
 @router.get("/events", response_model=List[Event])
 def list_events(city: Optional[str] = Query(None)) -> List[Event]:
     """Return upcoming cultural events."""
-    items = load_dataset("events", city=city)
-    for item in items:
-        item["start_time"] = datetime.fromisoformat(item["start_time"])
-        item["end_time"] = datetime.fromisoformat(item["end_time"])
-    return [Event(**item) for item in items]
+    events = []
+    for item in load_dataset("events", city=city):
+        start = item.get("start_time")
+        end = item.get("end_time")
+        start_dt = datetime.fromisoformat(start) if isinstance(start, str) else start
+        end_dt = datetime.fromisoformat(end) if isinstance(end, str) else end
+        events.append(Event(**{**item, "start_time": start_dt, "end_time": end_dt}))
+    return events

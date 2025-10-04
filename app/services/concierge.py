@@ -40,7 +40,12 @@ def _search_sections(query: str, language: str) -> Tuple[List[str], List[str], i
 
     # Food venues
     for venue in load_dataset("venues"):
-        if any(tag in query_lower for tag in [t.lower() for t in venue["tags"]]) or venue["name"].lower() in query_lower:
+        tags = [tag.lower() for tag in venue["tags"]]
+        normalised_tags = {tag.replace("-", " ") for tag in tags}
+        if (
+            venue["name"].lower() in query_lower
+            or any(tag in query_lower for tag in normalised_tags)
+        ):
             responses.append(
                 f"{venue['name']} — {venue['description']} (Tags: {', '.join(venue['tags'])})."
             )

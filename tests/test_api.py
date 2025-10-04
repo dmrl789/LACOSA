@@ -71,6 +71,18 @@ def test_housing_filter() -> None:
     assert all(rental["kid_friendly"] for rental in rentals)
 
 
+def test_lifestyle_remote_work_filter() -> None:
+    response = client.get(
+        "/api/lifestyle/venues", params={"remote_work_friendly": True}
+    )
+    assert response.status_code == 200
+    venues = response.json()
+    assert venues
+    for venue in venues:
+        normalised_tags = {tag.lower().replace("-", " ") for tag in venue["tags"]}
+        assert "remote work friendly" in normalised_tags
+
+
 def test_relocation_pack_fields() -> None:
     response = client.get("/api/relocation/packs")
     assert response.status_code == 200

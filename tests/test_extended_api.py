@@ -64,3 +64,8 @@ def test_select_city_ack() -> None:
     assert r.json().get("ok") in (True, False)
 
 
+def test_requesting_unsupported_city_returns_error() -> None:
+    r = client.get("/api/housing/rentals", params={"city": "Atlantis"})
+    assert r.status_code == 400
+    body = r.json()
+    assert body["error"]["code"] == "unsupported_city"

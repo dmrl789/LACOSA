@@ -1,7 +1,6 @@
 """API router assembly for LACOSA."""
 from fastapi import APIRouter
 
-<<<<<<< HEAD
 from app.api import (
     concierge,
     culture,
@@ -14,10 +13,8 @@ from app.api import (
     transport,
     users,
     utilities,
+    utilities_stream,
 )
-=======
-from app.api import concierge, culture, housing, relocation, safety, schools, shopping, transport, users, utilities, utilities_stream
->>>>>>> d77d26e (WIP: local updates before sync)
 
 
 router = APIRouter(prefix="/api")

@@ -11,7 +11,6 @@ router = APIRouter(prefix="/concierge", tags=["concierge"])
 
 
 @router.get("/ask", response_model=ConciergeAnswer)
-<<<<<<< HEAD
 def ask_concierge(
     query: str,
     language: str = Query(
@@ -25,9 +24,3 @@ def ask_concierge(
 ) -> ConciergeAnswer:
     """Return a concierge answer for the provided query."""
     return answer_query(query=query, language=language)
-=======
-def ask_concierge(query: str = Query(...), city: str | None = Query(None)) -> ConciergeAnswer:
-    """Return a concierge answer for the provided query."""
-    # City is not yet used in the rule-based engine, but plumbed for future
-    return answer_query(query)
->>>>>>> d77d26e (WIP: local updates before sync)

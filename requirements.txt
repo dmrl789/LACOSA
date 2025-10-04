@@ -1,12 +1,7 @@
-fastapi>=0.115.0
+fastapi>=0.110,<0.111
 uvicorn==0.29.0
-<<<<<<< HEAD
-pydantic==2.11.9
-httpx==0.27.0
-=======
-pydantic>=2.7,<3.0
-httpx
+pydantic>=1.10.14,<2.0
+httpx>=0.27,<0.28
 pytest
 pyjwt>=2.8
 passlib[bcrypt]>=1.7
->>>>>>> d77d26e (WIP: local updates before sync)

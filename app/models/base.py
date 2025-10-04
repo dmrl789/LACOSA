@@ -12,6 +12,20 @@ class GeoPoint(BaseModel):
     lng: float = Field(..., description="Longitude coordinate")
 
 
+class MapMarker(BaseModel):
+    id: int
+    name: str
+    lat: float
+    lng: float
+
+
+class SafetyMarker(BaseModel):
+    id: int
+    lat: float
+    lng: float
+    risk: Literal["low", "medium", "high"]
+
+
 class SafetyZone(BaseModel):
     id: str
     neighborhood: str

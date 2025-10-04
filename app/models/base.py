@@ -121,6 +121,13 @@ class ConciergeAnswer(BaseModel):
     query: str
     answer: str
     sources: List[str]
+    confidence: float = Field(..., ge=0.0, le=1.0, description="Confidence score for the synthesized answer.")
+    language: str = Field(
+        ..., min_length=2, max_length=8, description="Language code used for the generated answer."
+    )
+    requested_language: str = Field(
+        ..., min_length=2, max_length=8, description="Language code originally requested by the client."
+    )
 
 
 class RelocationPack(BaseModel):

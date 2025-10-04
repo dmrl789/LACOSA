@@ -16,9 +16,10 @@ router = APIRouter(prefix="/schools", tags=["schools"])
 def list_schools(
     curriculum: Optional[str] = Query(None),
     level: Optional[str] = Query(None),
+    city: Optional[str] = Query(None),
 ) -> List[School]:
     """Return the school directory filtered by curriculum and level."""
-    schools = [School(**item) for item in load_dataset("schools")]
+    schools = [School(**item) for item in load_dataset("schools", city=city)]
     results: List[School] = []
     for school in schools:
         if curriculum and school.curriculum.lower() != curriculum.lower():

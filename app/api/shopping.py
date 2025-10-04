@@ -13,15 +13,15 @@ router = APIRouter(prefix="/shopping", tags=["shopping"])
 
 
 @router.get("/markets", response_model=List[Market])
-def list_markets(category: Optional[str] = Query(None)) -> List[Market]:
+def list_markets(category: Optional[str] = Query(None), city: Optional[str] = Query(None)) -> List[Market]:
     """List markets, grocery stores and delivery options."""
-    markets = [Market(**item) for item in load_dataset("markets")]
+    markets = [Market(**item) for item in load_dataset("markets", city=city)]
     if category:
         return [market for market in markets if market.category.lower() == category.lower()]
     return markets
 
 
 @router.get("/essentials", response_model=List[Venue])
-def list_essentials() -> List[Venue]:
+def list_essentials(city: Optional[str] = Query(None)) -> List[Venue]:
     """Return curated essential venues such as pharmacies and electronics."""
-    return [Venue(**item) for item in load_dataset("essentials")]
+    return [Venue(**item) for item in load_dataset("essentials", city=city)]

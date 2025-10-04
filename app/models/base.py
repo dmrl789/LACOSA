@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import List, Optional
+from typing import List, Optional, Literal
 
 from pydantic import BaseModel, Field
 
@@ -15,7 +15,7 @@ class GeoPoint(BaseModel):
 class SafetyZone(BaseModel):
     id: str
     neighborhood: str
-    risk_level: str = Field(..., pattern="^(low|medium|high)$")
+    risk_level: Literal["low", "medium", "high"]
     description: str
     trend: str = Field(..., description="Day/night or temporal trend information")
     updated_at: datetime

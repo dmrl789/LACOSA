@@ -3,3 +3,10 @@ __pycache__/
 ENV/
 venv/
 .cache/
+# Frontend artifacts
+node_modules/
+**/node_modules/
+*.log
+*.lock
+dist/
+*.tsbuildinfo

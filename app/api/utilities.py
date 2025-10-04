@@ -22,10 +22,15 @@ def list_cities() -> List[str]:
 @router.get("/alerts", response_model=List[Alert])
 def list_alerts(city: Optional[str] = Query(None)) -> List[Alert]:
     """Return current safety/transport alerts."""
-    items = load_dataset("alerts", city=city)
-    for item in items:
-        item["published_at"] = datetime.fromisoformat(item["published_at"])
-    return [Alert(**item) for item in items]
+    alerts = []
+    for item in load_dataset("alerts", city=city):
+        published = item.get("published_at")
+        if isinstance(published, str):
+            published_dt = datetime.fromisoformat(published)
+        else:
+            published_dt = published
+        alerts.append(Alert(**{**item, "published_at": published_dt}))
+    return alerts
 
 
 @router.get("/select-city", response_model=dict)

@@ -1,0 +1,36 @@
+- name: enhancement
+  color: "a2eeef"
+  description: New feature or improvement
+- name: bug
+  color: "d73a4a"
+  description: Something isn't working
+- name: ui/ux
+  color: "c5def5"
+  description: Design or usability
+- name: data
+  color: "bfdadc"
+  description: Data ingestion, scraping, pipelines
+- name: AI
+  color: "5319e7"
+  description: LLM, RAG, prompts, moderation
+- name: good first issue
+  color: "7057ff"
+  description: Starter-friendly task
+- name: priority: high
+  color: "b60205"
+  description: Critical for MVP
+- name: priority: medium
+  color: "fbca04"
+  description: Important but not blocking
+- name: priority: low
+  color: "0e8a16"
+  description: Nice-to-have
+- name: docs
+  color: "0075ca"
+  description: Documentation updates
+- name: in progress
+  color: "1d76db"
+  description: Work has started
+- name: review
+  color: "c2e0c6"
+  description: Needs code/design review

@@ -1,0 +1,18 @@
+name: Add to Roadmap Project
+
+on:
+  issues:
+    types: [opened, reopened]
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add to project
+        uses: actions/add-to-project@v1
+        with:
+          # TODO: replace with your real org/user and project number
+          project-url: https://github.com/orgs/<YOUR_ORG>/projects/<PROJECT_NUMBER>
+          github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -3,7 +3,7 @@
     "id": "venue-001",
     "name": "Pasticceria Cappello",
     "type": "cafe",
-    "tags": ["wifi", "remote-friendly", "dessert"],
+    "tags": ["wifi", "remote-work-friendly", "dessert", "breakfast"],
     "description": "Family-run bakery with strong Wi-Fi and quiet upstairs seating.",
     "neighborhood": "Porta Nuova",
     "coordinates": {"lat": 38.1137, "lng": 13.3543},
@@ -13,7 +13,7 @@
     "id": "venue-002",
     "name": "Ferro di Cavallo",
     "type": "restaurant",
-    "tags": ["local", "family-friendly"],
+    "tags": ["local", "family-friendly", "vegetarian-friendly"],
     "description": "Classic trattoria welcoming to families, great for first-time visitors.",
     "neighborhood": "La Loggia",
     "coordinates": {"lat": 38.1184, "lng": 13.3621},
@@ -23,9 +23,19 @@
     "id": "venue-003",
     "name": "Nea",
     "type": "bar",
-    "tags": ["cocktails", "expat"],
+    "tags": ["cocktails", "expat", "late-night"],
     "description": "Cocktail bar popular with international community; bilingual staff.",
     "neighborhood": "Kalsa",
     "coordinates": {"lat": 38.1179, "lng": 13.3675}
+  },
+  {
+    "id": "venue-004",
+    "name": "Moltivolti",
+    "type": "restaurant",
+    "tags": ["vegetarian-friendly", "remote-work-friendly", "wifi"],
+    "description": "Social enterprise cafe with coworking tables and Mediterranean menu.",
+    "neighborhood": "Ballarò",
+    "coordinates": {"lat": 38.1109, "lng": 13.3627},
+    "url": "https://maps.google.com/?q=Moltivolti"
   }
 ]

@@ -38,6 +38,7 @@ requirements.txt  # Python dependencies
 | Housing & Rentals | `GET /api/housing/rentals` | Filterable rental listings with verification flags. |
 | Schools Directory | `GET /api/schools/directory` | Curriculum- and level-based lookup for schools. |
 | Food & Lifestyle | `GET /api/shopping/essentials` | Curated essentials (pharmacies, electronics). |
+| Cafés & Nightlife | `GET /api/lifestyle/venues` | Filterable list of cafés, restaurants, and bars with expat-friendly tags. |
 | Markets & Deliveries | `GET /api/shopping/markets` | Market schedules plus delivery partners. |
 | Arts & Culture | `GET /api/culture/events` | Upcoming events with AI summaries. |
 | Transport | `GET /api/transport/options` | Trusted transport providers and safety notes. |

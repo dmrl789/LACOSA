@@ -1,0 +1,59 @@
+name: Codex — Accept theirs (main) lockfile
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_path:
+        description: "Lockfile path"
+        required: true
+        default: "lacosa-mobile/package-lock.json"
+      base_branch:
+        description: "Base branch"
+        required: true
+        default: "main"
+      work_branch:
+        description: "Work branch"
+        required: true
+        default: "codex/accept-theirs-lockfile"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  accept-theirs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.base_branch }}
+          fetch-depth: 0
+
+      - name: Create work branch
+        run: git checkout -b "${{ inputs.work_branch }}"
+
+      - name: Restore lockfile from base (theirs)
+        run: |
+          git checkout origin/${{ inputs.base_branch }} -- "${{ inputs.target_path }}"
+          git add "${{ inputs.target_path }}"
+          git config user.name "codex-bot"
+          git config user.email "codex-bot@users.noreply.github.com"
+          git commit -m "fix: accept ${{
+            inputs.base_branch
+          }} version of ${{
+            inputs.target_path
+          }}"
+
+      - name: Push & PR
+        run: |
+          git push --set-upstream origin "${{ inputs.work_branch }}"
+      - uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ inputs.work_branch }}
+          base: ${{ inputs.base_branch }}
+          title: "Codex: accept ${{
+            inputs.base_branch
+          }} lockfile for ${{ inputs.target_path }}"
+          body: "Accepting main's version of the lockfile to resolve merge conflicts."
+          labels: codex,merge

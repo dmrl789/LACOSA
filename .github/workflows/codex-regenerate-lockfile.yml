@@ -1,0 +1,92 @@
+name: Codex — Regenerate package-lock.json (lacosa-mobile)
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_branch:
+        description: "Base branch to branch off (e.g., main)"
+        required: true
+        default: "main"
+      work_branch:
+        description: "New branch name to push changes"
+        required: true
+        default: "codex/regenerate-lockfile-lacosa-mobile"
+  issues:
+    types: [opened, edited, labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  regenerate:
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' &&
+       contains(github.event.issue.title, 'Codex: regenerate lockfile (lacosa-mobile)'))
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.base_branch || 'main' }}
+          fetch-depth: 0
+
+      - name: Define branch names
+        id: vars
+        run: |
+          if [ -n "${{ github.event.inputs.work_branch }}" ]; then
+            echo "work_branch=${{ github.event.inputs.work_branch }}" >> $GITHUB_OUTPUT
+          else
+            echo "work_branch=codex/regenerate-lockfile-lacosa-mobile" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create work branch
+        run: |
+          git checkout -b "${{ steps.vars.outputs.work_branch }}"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: lacosa-mobile/package-lock.json
+
+      - name: Clean & regenerate lockfile
+        working-directory: lacosa-mobile
+        run: |
+          rm -rf node_modules package-lock.json
+          npm install
+          npm run build --if-present
+
+      - name: Commit changes
+        run: |
+          git add lacosa-mobile/package-lock.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git config user.name "codex-bot"
+            git config user.email "codex-bot@users.noreply.github.com"
+            git commit -m "chore(lacosa-mobile): regenerate package-lock.json"
+          fi
+
+      - name: Push branch
+        run: |
+          git push --set-upstream origin "${{ steps.vars.outputs.work_branch }}" || true
+
+      - name: Open PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ steps.vars.outputs.work_branch }}
+          base: ${{ github.event.inputs.base_branch || 'main' }}
+          title: "Codex: regenerate lacosa-mobile/package-lock.json"
+          body: |
+            This PR was created by the Codex workflow to regenerate `lacosa-mobile/package-lock.json`.
+            - Deleted existing lockfile and node_modules
+            - Ran `npm install` with Node 20
+            - Built the app (if build script exists)
+            Please review and merge.
+          labels: |
+            codex
+            dependencies

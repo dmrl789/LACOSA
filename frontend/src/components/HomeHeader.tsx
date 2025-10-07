@@ -1,6 +1,31 @@
 import { Bell, ChevronDown, Search } from "lucide-react";
 
-export default function HomeHeader() {
+type HomeHeaderProps = {
+  status?: string;
+  isChecking?: boolean;
+  hasError?: boolean;
+};
+
+export default function HomeHeader({ status, isChecking, hasError }: HomeHeaderProps) {
+  const indicatorLabel = (() => {
+    if (isChecking) return "Checking API";
+    if (hasError) return "API offline";
+    if (!status) return "Status unknown";
+    return status === "ok" ? "API online" : `API: ${status}`;
+  })();
+
+  const indicatorClasses = hasError
+    ? "bg-rose-500/90 text-white"
+    : isChecking
+      ? "bg-white/20 text-white/80"
+      : "bg-emerald-500/90 text-white";
+
+  const indicatorDotClasses = hasError
+    ? "bg-white"
+    : isChecking
+      ? "bg-white/70"
+      : "bg-white";
+
   return (
     <header className="sticky top-0 z-30 bg-gradient-to-b from-primary-600 via-primary-500 to-primary-500 px-5 pt-6 pb-4 text-white shadow-md">
       <div className="flex items-center gap-3">
@@ -23,6 +48,12 @@ export default function HomeHeader() {
       <p className="mt-4 text-sm font-medium tracking-tight text-white/90">
         Live alerts, housing, schools & essentials
       </p>
+      <div className="mt-2 flex items-center gap-2 text-[11px] font-medium">
+        <span className={`inline-flex items-center gap-2 rounded-full px-3 py-1 ${indicatorClasses}`}>
+          <span className={`inline-block h-2 w-2 rounded-full ${indicatorDotClasses}`} />
+          {indicatorLabel}
+        </span>
+      </div>
       <div className="mt-4 flex items-center gap-2">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-white/60" />

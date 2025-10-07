@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_BASE ?? "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_BASE_URL ?? "http://localhost:8000";
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`);
@@ -9,6 +9,7 @@ async function get<T>(path: string): Promise<T> {
 }
 
 export const api = {
+  health: () => get<{ status: string }>("/health"),
   safetyZones: () =>
     get<
       Array<{

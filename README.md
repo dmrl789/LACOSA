@@ -33,6 +33,42 @@ requirements.txt  # Python dependencies
    ```
 4. **Explore the interactive docs** at [http://localhost:8000/docs](http://localhost:8000/docs).
 
+## LACOSA — Dev Quickstart (API + Mobile)
+
+### 1) Run locally (no Docker)
+
+**API**
+```bash
+cp .env.example .env
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
+# http://localhost:8000/health
+# http://localhost:8000/docs
+```
+
+**Mobile (Vite + React + TS)**
+
+```bash
+cd lacosa-mobile
+cp .env.example .env   # optional: define VITE_API_BASE_URL=http://localhost:8000
+npm install
+npm run dev
+# http://localhost:5173
+```
+
+### 2) Run with Docker Compose
+
+```bash
+docker compose up --build
+# web:  http://localhost:5173
+# api:  http://localhost:8000
+```
+
+The mobile app calls:
+
+- `VITE_API_BASE_URL` if set, or
+- `/api/*` via Vite proxy to the API (configured in `vite.config.ts`).
+
 ### Running with Docker
 
 The project ships with a production-ready multi-stage image that runs Gunicorn with
@@ -42,6 +78,15 @@ Uvicorn workers under a non-root user. Build and start the container with:
 docker build -t lacosa-api .
 docker run --env-file .env -p 8000:8000 lacosa-api
 ```
+
+## Frontend & Mobile Clients
+
+The repository includes two Vite-powered clients that consume the FastAPI backend:
+
+- [`frontend/`](frontend/README.md) – Web dashboard optimised for mobile layouts. Run `npm install && npm run dev` and configure the API base URL via `.env`.
+- [`lacosa-mobile/`](lacosa-mobile/README.md) – Mobile shell prototype with bottom navigation parity. Also configure via `.env`.
+
+Both projects expect `VITE_API_BASE_URL` to point to the backend (defaults to `http://localhost:8000`) and surface a `/health` badge to confirm connectivity.
 
 ## Available Endpoints
 

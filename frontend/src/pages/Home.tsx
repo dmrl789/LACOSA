@@ -15,6 +15,11 @@ const quickActions = [
 ];
 
 export default function HomePage() {
+  const {
+    data: health,
+    isLoading: isHealthLoading,
+    isError: isHealthError,
+  } = useQuery({ queryKey: ["health"], queryFn: api.health, staleTime: 60_000, retry: 1 });
   const { data: alerts } = useQuery({ queryKey: ["alerts"], queryFn: api.alerts });
   const { data: housing } = useQuery({ queryKey: ["housing", "spotlight"], queryFn: api.housing });
   const { data: essentials } = useQuery({ queryKey: ["essentials"], queryFn: api.essentials });
@@ -28,7 +33,11 @@ export default function HomePage() {
 
   return (
     <div className="pb-6">
-      <HomeHeader />
+      <HomeHeader
+        status={health?.status}
+        isChecking={isHealthLoading}
+        hasError={isHealthError}
+      />
       <section className="space-y-6 px-5 pt-5">
         <div>
           <div className="flex items-center justify-between">

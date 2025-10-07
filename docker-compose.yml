@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/app
+    networks:
+      - lacosa
+
+  web:
+    image: node:20-alpine
+    working_dir: /usr/src/app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    environment:
+      - VITE_API_PROXY_TARGET=http://api:8000
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./lacosa-mobile:/usr/src/app
+    depends_on:
+      - api
+    networks:
+      - lacosa
+
+networks:
+  lacosa:
+    driver: bridge

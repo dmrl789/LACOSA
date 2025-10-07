@@ -37,6 +37,9 @@ def test_safety_geojson_feature_collection() -> None:
         f0 = fc["features"][0]
         assert f0["type"] == "Feature"
         assert f0["geometry"]["type"] == "Polygon"
+        ring = f0["geometry"]["coordinates"][0]
+        assert len(ring) >= 4
+        assert ring[0] == ring[-1]
 
 
 def test_rentals_pagination_and_search() -> None:

@@ -57,6 +57,8 @@ def list_safety_zones_geojson(city: Optional[str] = Query(None)) -> Dict[str, An
         }
         # Polygon is stored as list of objects {lat, lng} -> convert to [lng, lat]
         ring = [[pt["lng"], pt["lat"]] for pt in zone["polygon"]]
+        if ring and ring[0] != ring[-1]:
+            ring.append(ring[0])
         geometry = {"type": "Polygon", "coordinates": [ring]}
         features.append({"type": "Feature", "geometry": geometry, "properties": properties})
     return {"type": "FeatureCollection", "features": features}

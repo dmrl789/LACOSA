@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 @asynccontextmanager
-def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI):
     """Log startup and shutdown events."""
 
     logger.info("Starting LACOSA service", extra={"environment": settings.environment})

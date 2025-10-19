@@ -9,7 +9,7 @@ export default function EssentialsPage() {
   const [category, setCategory] = useState<Category>("Health");
   const { data: essentials } = useQuery({ queryKey: ["essentials"], queryFn: api.essentials });
   const { data: schools } = useQuery({ queryKey: ["schools"], queryFn: api.schools });
-  const { data: transport } = useQuery({ queryKey: ["transport"], queryFn: api.essentials });
+  const { data: transport } = useQuery({ queryKey: ["transport"], queryFn: api.transportOptions });
 
   const items = useMemo(() => {
     switch (category) {
@@ -24,7 +24,7 @@ export default function EssentialsPage() {
           status: "Open",
         }));
       case "Transport":
-        return transport?.filter((e) => e.category === "Transport");
+        return transport;
       case "Shopping":
         return essentials?.filter((e) => e.category === "Shopping" || e.category === "Electronics");
       case "Services":
